@@ -1,22 +1,22 @@
 #java specific
-*.class
+**/*.class
 
 ## generic files to ignore
 *~
 .gradle
-/build
-/out
-/intellij
-/*.iml
-/*.ipr
-/*.iws
-*.classpath
-*.project
-*.settings
-/bin
-.DS_Store
-.idea
-.nb-gradle
-*.swp
-*.out
-*.lock
+**/build/
+**/out
+**/intellij
+**/*.iml
+**/*.ipr
+**/*.iws
+**/*.classpath
+**/*.project
+**/*.settings
+**/bin
+**/.DS_Store
+**/.idea
+**/.nb-gradle
+**/*.swp
+**/*.out
+**/*.lock

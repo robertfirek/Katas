@@ -12,5 +12,4 @@ Implement a Stack class with the following public methods:
 
 Stack should throw an exception if popped when empty.
 
-
 =====
