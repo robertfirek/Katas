@@ -2,6 +2,7 @@ Katas
 =====
 
 Stack:
+
 Implement a Stack class with the following public methods:
 
 - void push(Object object)
