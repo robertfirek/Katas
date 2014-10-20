@@ -1,7 +1,7 @@
 Katas
 =====
 
-Stack:
+<b>Stack</b>:
 
 Implement a Stack class with the following public methods:
 
