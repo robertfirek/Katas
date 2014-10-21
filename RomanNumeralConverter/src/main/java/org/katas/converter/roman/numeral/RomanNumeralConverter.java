@@ -17,7 +17,19 @@ public class RomanNumeralConverter {
         put(9,"IX");
     }};
 
+    private final Map<Integer,String> tens = new HashMap<Integer,String>() {{
+        put(10,"X");
+        put(20,"XX");
+        put(30,"XXX");
+        put(40,"XL");
+        put(50,"L");
+        put(60,"LX");
+        put(70,"LXX");
+        put(80,"LXXX");
+        put(90,"XC");
+    }};
+
     public String convert(int number) {
-        return units.get(number);
+        return number < 10 ? units.get(number) : tens.get(number);
     }
 }
