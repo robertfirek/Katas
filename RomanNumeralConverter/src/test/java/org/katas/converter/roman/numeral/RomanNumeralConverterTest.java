@@ -46,4 +46,24 @@ public class RomanNumeralConverterTest {
         assertThat(tensAsRomanNumeral.get(7), is("LXXX"));
         assertThat(tensAsRomanNumeral.get(8), is("XC"));
     }
+
+    @Test
+    public void canConvertHundreds() throws Exception {
+        final RomanNumeralConverter converter = new RomanNumeralConverter();
+
+        List<String> hundredsAsRomanNumeral = IntStream.rangeClosed(1, 9).map(it -> it * 100)
+                .mapToObj(unit -> converter.convert(unit)).collect(toList());
+
+        assertThat(hundredsAsRomanNumeral.get(0), is("C"));
+        assertThat(hundredsAsRomanNumeral.get(1), is("CC"));
+        assertThat(hundredsAsRomanNumeral.get(2), is("CCC"));
+        assertThat(hundredsAsRomanNumeral.get(3), is("CD"));
+        assertThat(hundredsAsRomanNumeral.get(4), is("D"));
+        assertThat(hundredsAsRomanNumeral.get(5), is("DC"));
+        assertThat(hundredsAsRomanNumeral.get(6), is("DCC"));
+        assertThat(hundredsAsRomanNumeral.get(7), is("DCCC"));
+        assertThat(hundredsAsRomanNumeral.get(8), is("CM"));
+    }
+
+
 }
