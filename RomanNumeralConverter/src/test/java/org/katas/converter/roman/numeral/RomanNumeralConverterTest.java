@@ -2,11 +2,9 @@ package org.katas.converter.roman.numeral;
 
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -91,4 +89,21 @@ public class RomanNumeralConverterTest {
         assertThat(thousandsAsRomanNumeral.get(3000), is("MMM"));
     }
 
+    @Test
+    public void canConvertCombinationOfUnitsTensHundredsAndThousands() throws Exception {
+        final RomanNumeralConverter converter = new RomanNumeralConverter();
+        int firstNumber = 2499;
+        int seconNumber = 3949;
+        int numberWithoutUnits = 3940;
+        int numberWithoutTens = 3906;
+        int numberWithoutHundreds = 3043;
+        int numberWithoutThousands = 721;
+
+        assertThat(converter.convert(firstNumber), is("MMCDXCIX"));
+        assertThat(converter.convert(seconNumber), is("MMMCMXLIX"));
+        assertThat(converter.convert(numberWithoutUnits), is("MMMCMXL"));
+        assertThat(converter.convert(numberWithoutTens), is("MMMCMVI"));
+        assertThat(converter.convert(numberWithoutHundreds), is("MMMXLIII"));
+        assertThat(converter.convert(numberWithoutThousands), is("DCCXXI"));
+    }
 }

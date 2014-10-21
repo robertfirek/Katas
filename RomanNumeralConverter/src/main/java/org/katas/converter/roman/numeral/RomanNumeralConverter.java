@@ -48,15 +48,32 @@ public class RomanNumeralConverter {
     }};
 
     public String convert(int number) {
-        if (number < 10) {
-            return units.get(number);
+        int remainder = number;
+        int numberOfThousands = remainder / 1000;
+
+        remainder = number % 1000;
+        int numberOfHundreds = remainder / 100;
+
+        remainder = remainder % 100;
+        int numberOfTens = remainder / 10;
+
+        remainder = number % 10;
+        int numberOfUnits = remainder / 1;
+
+        StringBuilder romanNumeral = new StringBuilder();
+        if (numberOfThousands > 0) {
+            romanNumeral.append(this.thousands.get(numberOfThousands * 1000));
         }
-        if (number < 100) {
-            return tens.get(number);
+        if (numberOfHundreds > 0) {
+            romanNumeral.append(this.hundreds.get(numberOfHundreds * 100));
         }
-        if (number < 1000) {
-            return hundreds.get(number);
+        if (numberOfTens > 0) {
+            romanNumeral.append(this.tens.get(numberOfTens * 10));
         }
-        return thousands.get(number);
+        if (numberOfUnits > 0) {
+            romanNumeral.append(this.units.get(numberOfUnits));
+        }
+
+        return romanNumeral.toString();
     }
 }
