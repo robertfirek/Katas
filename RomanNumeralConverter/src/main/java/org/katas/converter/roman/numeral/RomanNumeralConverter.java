@@ -41,6 +41,12 @@ public class RomanNumeralConverter {
         put(900, "CM");
     }};
 
+    private final Map<Integer, String> thousands = new HashMap<Integer, String>() {{
+        put(1000, "M");
+        put(2000, "MM");
+        put(3000, "MMM");
+    }};
+
     public String convert(int number) {
         if (number < 10) {
             return units.get(number);
@@ -48,6 +54,9 @@ public class RomanNumeralConverter {
         if (number < 100) {
             return tens.get(number);
         }
-        return hundreds.get(number);
+        if (number < 1000) {
+            return hundreds.get(number);
+        }
+        return thousands.get(number);
     }
 }
