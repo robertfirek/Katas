@@ -1,15 +1,22 @@
 package org.katas.converter.roman.numeral;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Map;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toMap;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RomanNumeralConverterTest {
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
 
     @Test
     public void canConvertUnits() throws Exception {
@@ -105,5 +112,23 @@ public class RomanNumeralConverterTest {
         assertThat(converter.convert(numberWithoutTens), is("MMMCMVI"));
         assertThat(converter.convert(numberWithoutHundreds), is("MMMXLIII"));
         assertThat(converter.convert(numberWithoutThousands), is("DCCXXI"));
+    }
+
+    @Test
+    public void canOnlyConvertPositiveNumberGreaterThenZero() throws Exception {
+        final RomanNumeralConverter converter = new RomanNumeralConverter();
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage(is("Number must be in range [1,3999]."));
+
+        converter.convert(-1);
+    }
+
+    @Test
+    public void canOnlyConvertNumberLowerThen3999() throws Exception {
+        final RomanNumeralConverter converter = new RomanNumeralConverter();
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage(is("Number must be in range [1,3999]."));
+
+        converter.convert(4000);
     }
 }

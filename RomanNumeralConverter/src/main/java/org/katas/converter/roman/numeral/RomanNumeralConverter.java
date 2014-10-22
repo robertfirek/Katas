@@ -6,6 +6,10 @@ import java.util.stream.Stream;
 public class RomanNumeralConverter {
 
     public String convert(int number) {
+        if (number < 1 || number > 3999) {
+            throw new IllegalArgumentException("Number must be in range [1,3999].");
+        }
+
         RomanNumeralBuilder romanNumeralBuilder = new RomanNumeralBuilder(number);
 
         Optional<RomanNumeralBuilder> optionaRomanNumeralBuilder = Stream.<RomanNumeralBuilder>builder().add(romanNumeralBuilder).build()
