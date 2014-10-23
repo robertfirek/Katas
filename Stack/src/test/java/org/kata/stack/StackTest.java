@@ -8,9 +8,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StackTest {
 
-    public static final Object OBJECT_TO_STORE = new Object();
-    public static final Object ANOTHER_OBJECT_TO_STORE = "";
-    public static final Object THIRD_OBJECT_TO_STORE = new Object[]{};
+    private static final Object OBJECT_TO_STORE = new Object();
+    private static final Object ANOTHER_OBJECT_TO_STORE = "";
+    private static final Object THIRD_OBJECT_TO_STORE = new Object[]{};
     private Stack stack;
 
     @Before
