@@ -1,63 +1,58 @@
 package org.kata.stack;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StackTest {
+
+    public static final Object OBJECT_TO_STORE = new Object();
+    public static final Object ANOTHER_OBJECT_TO_STORE = "";
+    public static final Object THIRD_OBJECT_TO_STORE = new Object[]{};
+    private Stack stack;
+
+    @Before
+    public void setUp() throws Exception {
+        stack = new Stack();
+    }
+
     @Test
     public void canStoreObjectsAndReadObjects() throws Exception {
-        Stack stack = new Stack();
-        Object objectToStore = new Object();
+        stack.push(OBJECT_TO_STORE);
 
-        stack.push(objectToStore);
-
-        assertThat(stack.pop(), is(objectToStore));
+        assertThat(stack.pop(), is(OBJECT_TO_STORE));
     }
 
     @Test
     public void shouldReadObjectWhichWasAddedAsLastOne() throws Exception {
-        Stack stack = new Stack();
-        Object objectToStore = new Object();
-        Object anotherObjectToStore = new String();
+        stack.push(OBJECT_TO_STORE);
+        stack.push(ANOTHER_OBJECT_TO_STORE);
 
-        stack.push(objectToStore);
-        stack.push(anotherObjectToStore);
-
-        assertThat(stack.pop(),is(anotherObjectToStore));
+        assertThat(stack.pop(), is(ANOTHER_OBJECT_TO_STORE));
     }
 
     @Test
     public void afterReadingLastObjectShouldReadObjectWhichWasAddedBeforeLastObject() throws Exception {
-        Stack stack = new Stack();
-        Object objectToStore = new Object();
-        Object anotherObjectToStore = new String();
-        Object thirdObjectToStore = new Object[]{};
+        stack.push(OBJECT_TO_STORE);
+        stack.push(ANOTHER_OBJECT_TO_STORE);
+        stack.push(THIRD_OBJECT_TO_STORE);
 
-        stack.push(objectToStore);
-        stack.push(anotherObjectToStore);
-        stack.push(thirdObjectToStore);
-
-        assertThat(stack.pop(),is(thirdObjectToStore));
-        assertThat(stack.pop(),is(anotherObjectToStore));
-        assertThat(stack.pop(),is(objectToStore));
+        assertThat(stack.pop(), is(THIRD_OBJECT_TO_STORE));
+        assertThat(stack.pop(), is(ANOTHER_OBJECT_TO_STORE));
+        assertThat(stack.pop(), is(OBJECT_TO_STORE));
     }
 
     @Test(expected = StackIsEmptyException.class)
     public void shouldNotReadObjectsWhenItEmpty() throws Exception {
-        Stack stack = new Stack();
-        Object objectToStore = new Object();
-        Object anotherObjectToStore = new String();
-        Object thirdObjectToStore = new Object[]{};
+        stack.push(OBJECT_TO_STORE);
+        stack.push(ANOTHER_OBJECT_TO_STORE);
+        stack.push(THIRD_OBJECT_TO_STORE);
 
-        stack.push(objectToStore);
-        stack.push(anotherObjectToStore);
-        stack.push(thirdObjectToStore);
-
-        assertThat(stack.pop(),is(thirdObjectToStore));
-        assertThat(stack.pop(),is(anotherObjectToStore));
-        assertThat(stack.pop(),is(objectToStore));
+        assertThat(stack.pop(), is(THIRD_OBJECT_TO_STORE));
+        assertThat(stack.pop(), is(ANOTHER_OBJECT_TO_STORE));
+        assertThat(stack.pop(), is(OBJECT_TO_STORE));
         stack.pop();
     }
 }
