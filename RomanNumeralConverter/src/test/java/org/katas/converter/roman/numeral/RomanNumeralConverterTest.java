@@ -29,7 +29,7 @@ public class RomanNumeralConverterTest {
         Map<Integer, String> unitsAsRomanNumeral = IntStream.rangeClosed(1, 9)
                 .mapToObj(number -> number)
                 .collect(
-                        toMap(number -> number, number -> converter.convert(number))
+                        toMap(number -> number, converter::convert)
                 );
 
         assertThat(unitsAsRomanNumeral.get(1), is("I"));
@@ -48,7 +48,7 @@ public class RomanNumeralConverterTest {
         Map<Integer, String> tensAsRomanNumeral = IntStream.rangeClosed(1, 9)
                 .mapToObj(number -> number * 10)
                 .collect(
-                        toMap(number -> number, number -> converter.convert(number))
+                        toMap(number -> number, converter::convert)
                 );
 
         assertThat(tensAsRomanNumeral.get(10), is("X"));
@@ -67,7 +67,7 @@ public class RomanNumeralConverterTest {
         Map<Integer, String> hundredsAsRomanNumeral = IntStream.rangeClosed(1, 9)
                 .mapToObj(number -> number * 100)
                 .collect(
-                        toMap(number -> number, number -> converter.convert(number))
+                        toMap(number -> number, converter::convert)
                 );
 
         assertThat(hundredsAsRomanNumeral.get(100), is("C"));
@@ -86,7 +86,7 @@ public class RomanNumeralConverterTest {
         Map<Integer, String> thousandsAsRomanNumeral = IntStream.rangeClosed(1, 3)
                 .mapToObj(number -> number * 1000)
                 .collect(
-                        toMap(number -> number, number -> converter.convert(number))
+                        toMap(number -> number, converter::convert)
                 );
 
         assertThat(thousandsAsRomanNumeral.get(1000), is("M"));

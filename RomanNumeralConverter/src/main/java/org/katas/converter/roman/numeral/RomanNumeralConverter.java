@@ -12,14 +12,14 @@ public class RomanNumeralConverter {
 
         RomanNumeralBuilder romanNumeralBuilder = new RomanNumeralBuilder(number);
 
-        Optional<RomanNumeralBuilder> optionaRomanNumeralBuilder = Stream.<RomanNumeralBuilder>builder().add(romanNumeralBuilder).build()
+        Optional<RomanNumeralBuilder> optionalRomanNumeralBuilder = Stream.<RomanNumeralBuilder>builder().add(romanNumeralBuilder).build()
                 .map(builder -> builder.appendRomanNumeral(getRomanNumeral(builder.getReminder() / 1000, "M", "M", "M"), builder.getReminder() % 1000))
                 .map(builder -> builder.appendRomanNumeral(getRomanNumeral(builder.getReminder() / 100, "C", "D", "M"), builder.getReminder() % 100))
                 .map(builder -> builder.appendRomanNumeral(getRomanNumeral(builder.getReminder() / 10, "X", "L", "C"), builder.getReminder() % 10))
-                .map(builder -> builder.appendRomanNumeral(getRomanNumeral(builder.getReminder(), "I", "V", "X"), builder.getReminder() % 1))
+                .map(builder -> builder.appendRomanNumeral(getRomanNumeral(builder.getReminder(), "I", "V", "X"), 0))
                 .findFirst();
 
-        return optionaRomanNumeralBuilder.get().getRomanNumeralString();
+        return optionalRomanNumeralBuilder.get().getRomanNumeralString();
     }
 
     private String getRomanNumeral(int number, String prefix, String middle, String suffix) {
