@@ -1,5 +1,6 @@
 package org.katas.converter.roman.numeral;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -8,7 +9,6 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toMap;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -17,15 +17,19 @@ public class RomanNumeralConverterTest {
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
+    private RomanNumeralConverter converter;
+
+    @Before
+    public void setUp() throws Exception {
+        converter = new RomanNumeralConverter();
+    }
 
     @Test
     public void canConvertUnits() throws Exception {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
-
         Map<Integer, String> unitsAsRomanNumeral = IntStream.rangeClosed(1, 9)
-                .map(it -> it * 1).mapToObj(it -> it)
+                .mapToObj(number -> number)
                 .collect(
-                        toMap(it -> it, unit -> converter.convert(unit))
+                        toMap(number -> number, number -> converter.convert(number))
                 );
 
         assertThat(unitsAsRomanNumeral.get(1), is("I"));
@@ -41,12 +45,10 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void canConvertTens() throws Exception {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
-
         Map<Integer, String> tensAsRomanNumeral = IntStream.rangeClosed(1, 9)
-                .map(it -> it * 10).mapToObj(it -> it)
+                .mapToObj(number -> number * 10)
                 .collect(
-                        toMap(it -> it, unit -> converter.convert(unit))
+                        toMap(number -> number, number -> converter.convert(number))
                 );
 
         assertThat(tensAsRomanNumeral.get(10), is("X"));
@@ -62,12 +64,10 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void canConvertHundreds() throws Exception {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
-
         Map<Integer, String> hundredsAsRomanNumeral = IntStream.rangeClosed(1, 9)
-                .map(it -> it * 100).mapToObj(it -> it)
+                .mapToObj(number -> number * 100)
                 .collect(
-                        toMap(it -> it, unit -> converter.convert(unit))
+                        toMap(number -> number, number -> converter.convert(number))
                 );
 
         assertThat(hundredsAsRomanNumeral.get(100), is("C"));
@@ -83,12 +83,10 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void canConvertThousands() throws Exception {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
-
         Map<Integer, String> thousandsAsRomanNumeral = IntStream.rangeClosed(1, 3)
-                .map(it -> it * 1000).mapToObj(it -> it)
+                .mapToObj(number -> number * 1000)
                 .collect(
-                        toMap(it -> it, unit -> converter.convert(unit))
+                        toMap(number -> number, number -> converter.convert(number))
                 );
 
         assertThat(thousandsAsRomanNumeral.get(1000), is("M"));
@@ -98,16 +96,15 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void canConvertCombinationOfUnitsTensHundredsAndThousands() throws Exception {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
         int firstNumber = 2499;
-        int seconNumber = 3949;
+        int secondNumber = 3949;
         int numberWithoutUnits = 3940;
         int numberWithoutTens = 3906;
         int numberWithoutHundreds = 3043;
         int numberWithoutThousands = 721;
 
         assertThat(converter.convert(firstNumber), is("MMCDXCIX"));
-        assertThat(converter.convert(seconNumber), is("MMMCMXLIX"));
+        assertThat(converter.convert(secondNumber), is("MMMCMXLIX"));
         assertThat(converter.convert(numberWithoutUnits), is("MMMCMXL"));
         assertThat(converter.convert(numberWithoutTens), is("MMMCMVI"));
         assertThat(converter.convert(numberWithoutHundreds), is("MMMXLIII"));
@@ -116,7 +113,6 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void canOnlyConvertPositiveNumberGreaterThenZero() throws Exception {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage(is("Number must be in range [1,3999]."));
 
@@ -125,7 +121,6 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void canOnlyConvertNumberLowerThen3999() throws Exception {
-        final RomanNumeralConverter converter = new RomanNumeralConverter();
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage(is("Number must be in range [1,3999]."));
 
