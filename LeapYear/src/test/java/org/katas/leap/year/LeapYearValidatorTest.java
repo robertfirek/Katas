@@ -62,11 +62,11 @@ public class LeapYearValidatorTest {
 
     @Test
     public void recognisesAsLeapYearsWhichAreDivisibleBy4() throws Exception {
-        IntStream leapYearsDivisibleBy4 = IntStream.of(1604, 1780,  1856, 1940, 2000, 2012);
-        IntStream leapYearsNotDivisibleBy4 = IntStream.of(1603, 1779,  1855,  1939, 1999, 2010);
+        IntStream leapYearsDivisibleBy4 = IntStream.of(1604, 1780, 1856, 1940, 2000, 2012);
+        IntStream leapYearsNotDivisibleBy4 = IntStream.of(1603, 1779, 1855, 1939, 1999, 2010);
 
         Map<Integer, Boolean> leapYearValidationResults = IntStream
-                .concat(leapYearsDivisibleBy4,leapYearsNotDivisibleBy4)
+                .concat(leapYearsDivisibleBy4, leapYearsNotDivisibleBy4)
                 .mapToObj(year -> year)
                 .collect(toMap(year -> year, leapYearValidator::isLeapYear));
 
